@@ -21,7 +21,6 @@
 		BBE14A861EC43804000989FA /* UIColorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A851EC43804000989FA /* UIColorConst.swift */; };
 		BBE14A881EC439BD000989FA /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A871EC439BD000989FA /* HomeVC.swift */; };
 		BBE14A8A1EC43B04000989FA /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A891EC43B04000989FA /* Macros.swift */; };
-		BBE14A911EC44E34000989FA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A901EC44E34000989FA /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -237,7 +236,6 @@
 			files = (
 				BBE14A661EC4106D000989FA /* LaunchScreen.storyboard in Resources */,
 				BBE14A631EC4106D000989FA /* Assets.xcassets in Resources */,
-				BBE14A911EC44E34000989FA /* Info.plist in Resources */,
 				BBE14A611EC4106D000989FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
