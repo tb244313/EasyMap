@@ -10,9 +10,36 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var mapView: MAMapView!
+    var search: AMapSearchAPI!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    
+        initMapView()
+        initSearch()
+    }
+    
+    func initMapView() {
+        mapView = MAMapView(frame: view.bounds)
+        mapView.delegate = self
+        view.addSubview(mapView)
+        
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
+//        mapView.zoomLevel = 
+    }
+    
+    func initSearch() {
+        search = AMapSearchAPI()
+        search.delegate = self
+        
+        let stop = AMapBusStopSearchRequest()
+        stop.keywords = "会江"
+        stop.city = "guangzhou"
+        
+        search.aMapBusStopSearch(stop)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,3 +50,16 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController: MAMapViewDelegate {
+    
+}
+
+extension ViewController: AMapSearchDelegate {
+    func onBusStopSearchDone(_ request: AMapBusStopSearchRequest!, response: AMapBusStopSearchResponse!) {
+        if response.busstops.count == 0 {
+            return
+        }
+        
+        print(response)
+    }
+}

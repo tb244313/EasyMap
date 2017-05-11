@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,7 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let AMAP_KEY = "e8de6312a5da9f075f8701872e98c817"
+        AMapServices.shared().enableHTTPS = true
+        AMapServices.shared().apiKey = AMAP_KEY
+        
         return true
     }
 

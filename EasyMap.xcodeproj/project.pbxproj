@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F55D3395AE88C2A87B86147 /* Pods_EasyMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6AFC0764BEA945D25697D66 /* Pods_EasyMap.framework */; };
 		BBE14A5C1EC4106D000989FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A5B1EC4106D000989FA /* AppDelegate.swift */; };
 		BBE14A5E1EC4106D000989FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A5D1EC4106D000989FA /* ViewController.swift */; };
 		BBE14A611EC4106D000989FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A5F1EC4106D000989FA /* Main.storyboard */; };
@@ -15,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B54E43CAA5CE3B0E830FF3CC /* Pods-EasyMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyMap/Pods-EasyMap.release.xcconfig"; sourceTree = "<group>"; };
+		B6AFC0764BEA945D25697D66 /* Pods_EasyMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE14A581EC4106D000989FA /* EasyMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE14A5B1EC4106D000989FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBE14A5D1EC4106D000989FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,8 @@
 		BBE14A621EC4106D000989FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBE14A651EC4106D000989FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBE14A671EC4106D000989FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBE14A6D1EC4162F000989FA /* EasyMap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyMap-Bridging-Header.h"; sourceTree = "<group>"; };
+		C21E4B814763589A83AA7314 /* Pods-EasyMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyMap/Pods-EasyMap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +34,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F55D3395AE88C2A87B86147 /* Pods_EasyMap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		51E1E6EB9B654245E8E45F54 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6AFC0764BEA945D25697D66 /* Pods_EasyMap.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		781D5061445719C1854D5FF6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C21E4B814763589A83AA7314 /* Pods-EasyMap.debug.xcconfig */,
+				B54E43CAA5CE3B0E830FF3CC /* Pods-EasyMap.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BBE14A4F1EC4106D000989FA = {
 			isa = PBXGroup;
 			children = (
 				BBE14A5A1EC4106D000989FA /* EasyMap */,
 				BBE14A591EC4106D000989FA /* Products */,
+				781D5061445719C1854D5FF6 /* Pods */,
+				51E1E6EB9B654245E8E45F54 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +85,7 @@
 				BBE14A621EC4106D000989FA /* Assets.xcassets */,
 				BBE14A641EC4106D000989FA /* LaunchScreen.storyboard */,
 				BBE14A671EC4106D000989FA /* Info.plist */,
+				BBE14A6D1EC4162F000989FA /* EasyMap-Bridging-Header.h */,
 			);
 			path = EasyMap;
 			sourceTree = "<group>";
@@ -71,9 +97,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBE14A6A1EC4106D000989FA /* Build configuration list for PBXNativeTarget "EasyMap" */;
 			buildPhases = (
+				72304D503C764D8BE4860878 /* [CP] Check Pods Manifest.lock */,
 				BBE14A541EC4106D000989FA /* Sources */,
 				BBE14A551EC4106D000989FA /* Frameworks */,
 				BBE14A561EC4106D000989FA /* Resources */,
+				1A693D961397DABCAAB4C649 /* [CP] Embed Pods Frameworks */,
+				A3D2986B4D7811A793905884 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -97,6 +126,7 @@
 					BBE14A571EC4106D000989FA = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = D3JEV5MWE2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -131,6 +161,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A693D961397DABCAAB4C649 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyMap/Pods-EasyMap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		72304D503C764D8BE4860878 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A3D2986B4D7811A793905884 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyMap/Pods-EasyMap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BBE14A541EC4106D000989FA /* Sources */ = {
@@ -261,26 +339,33 @@
 		};
 		BBE14A6B1EC4106D000989FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C21E4B814763589A83AA7314 /* Pods-EasyMap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = D3JEV5MWE2;
 				INFOPLIST_FILE = EasyMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonhory.EasyMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EasyMap/EasyMap-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		BBE14A6C1EC4106D000989FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B54E43CAA5CE3B0E830FF3CC /* Pods-EasyMap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = D3JEV5MWE2;
 				INFOPLIST_FILE = EasyMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonhory.EasyMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EasyMap/EasyMap-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -304,6 +389,7 @@
 				BBE14A6C1EC4106D000989FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
