@@ -13,7 +13,6 @@
 		BBE14A631EC4106D000989FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A621EC4106D000989FA /* Assets.xcassets */; };
 		BBE14A661EC4106D000989FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A641EC4106D000989FA /* LaunchScreen.storyboard */; };
 		BBE14A741EC43590000989FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A721EC43590000989FA /* AppDelegate.swift */; };
-		BBE14A751EC43590000989FA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A731EC43590000989FA /* Info.plist */; };
 		BBE14A7A1EC43626000989FA /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A791EC43626000989FA /* Tool.swift */; };
 		BBE14A7C1EC43631000989FA /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A7B1EC43631000989FA /* Extension.swift */; };
 		BBE14A811EC43798000989FA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A7D1EC43798000989FA /* BaseViewController.swift */; };
@@ -22,6 +21,7 @@
 		BBE14A861EC43804000989FA /* UIColorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A851EC43804000989FA /* UIColorConst.swift */; };
 		BBE14A881EC439BD000989FA /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A871EC439BD000989FA /* HomeVC.swift */; };
 		BBE14A8A1EC43B04000989FA /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A891EC43B04000989FA /* Macros.swift */; };
+		BBE14A8C1EC449E4000989FA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A8B1EC449E4000989FA /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,6 @@
 		BBE14A651EC4106D000989FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBE14A6D1EC4162F000989FA /* EasyMap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyMap-Bridging-Header.h"; sourceTree = "<group>"; };
 		BBE14A721EC43590000989FA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BBE14A731EC43590000989FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBE14A791EC43626000989FA /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		BBE14A7B1EC43631000989FA /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		BBE14A7D1EC43798000989FA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +42,7 @@
 		BBE14A851EC43804000989FA /* UIColorConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorConst.swift; sourceTree = "<group>"; };
 		BBE14A871EC439BD000989FA /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		BBE14A891EC43B04000989FA /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
+		BBE14A8B1EC449E4000989FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C21E4B814763589A83AA7314 /* Pods-EasyMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyMap/Pods-EasyMap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +104,7 @@
 				BBE14A5F1EC4106D000989FA /* Main.storyboard */,
 				BBE14A621EC4106D000989FA /* Assets.xcassets */,
 				BBE14A641EC4106D000989FA /* LaunchScreen.storyboard */,
+				BBE14A8B1EC449E4000989FA /* Info.plist */,
 				BBE14A6D1EC4162F000989FA /* EasyMap-Bridging-Header.h */,
 			);
 			path = EasyMap;
@@ -113,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				BBE14A721EC43590000989FA /* AppDelegate.swift */,
-				BBE14A731EC43590000989FA /* Info.plist */,
 			);
 			path = Important;
 			sourceTree = "<group>";
@@ -211,7 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBE14A751EC43590000989FA /* Info.plist in Resources */,
+				BBE14A8C1EC449E4000989FA /* Info.plist in Resources */,
 				BBE14A661EC4106D000989FA /* LaunchScreen.storyboard in Resources */,
 				BBE14A631EC4106D000989FA /* Assets.xcassets in Resources */,
 				BBE14A611EC4106D000989FA /* Main.storyboard in Resources */,
@@ -410,7 +410,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = D3JEV5MWE2;
-				INFOPLIST_FILE = EasyMap/Important/Info.plist;
+				INFOPLIST_FILE = EasyMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonhory.EasyMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -427,7 +427,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = D3JEV5MWE2;
-				INFOPLIST_FILE = EasyMap/Important/Info.plist;
+				INFOPLIST_FILE = EasyMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonhory.EasyMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";

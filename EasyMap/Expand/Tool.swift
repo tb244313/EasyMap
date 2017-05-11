@@ -85,9 +85,3 @@ func saveCurrentVersion() {
     UserDefaults.standard.set(true, forKey: "currentVersionIsFirstOpen" + CurrentVersion)
 }
 
-func callOurServer() {
-//    [[UIApplicationsharedApplication]openURL:[NSURLURLWithString:@"tel://10010"]];
-    if let url = URL(string: "tel://020-31142610") {
-        UIApplication.shared.openURL(url)
-    }
-}
