@@ -14,12 +14,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        let AMAP_KEY = "e8de6312a5da9f075f8701872e98c817"
+    //MARK:- 配置一些默认设置
+    func configNormal() {
         AMapServices.shared().enableHTTPS = true
         AMapServices.shared().apiKey = AMAP_KEY
+    }
+    
+    //MARK:- 创建根视图window
+    func loadWindow() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.makeKeyAndVisible()
+    }
+    
+    //MARK:- 正常显示tab
+    func enterNormal() {
+        let tab = BWTTabBarController()
+        self.window?.rootViewController = tab
+    }
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        configNormal()
+        loadWindow()
+        enterNormal()
         
         return true
     }
