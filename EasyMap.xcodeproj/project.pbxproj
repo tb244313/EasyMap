@@ -21,7 +21,7 @@
 		BBE14A861EC43804000989FA /* UIColorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A851EC43804000989FA /* UIColorConst.swift */; };
 		BBE14A881EC439BD000989FA /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A871EC439BD000989FA /* HomeVC.swift */; };
 		BBE14A8A1EC43B04000989FA /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A891EC43B04000989FA /* Macros.swift */; };
-		BBE14A8C1EC449E4000989FA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A8B1EC449E4000989FA /* Info.plist */; };
+		BBE14A911EC44E34000989FA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A901EC44E34000989FA /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +42,7 @@
 		BBE14A851EC43804000989FA /* UIColorConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorConst.swift; sourceTree = "<group>"; };
 		BBE14A871EC439BD000989FA /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		BBE14A891EC43B04000989FA /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
-		BBE14A8B1EC449E4000989FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBE14A901EC44E34000989FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C21E4B814763589A83AA7314 /* Pods-EasyMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyMap/Pods-EasyMap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,11 +100,11 @@
 				BBE14A761EC4359D000989FA /* Base */,
 				BBE14A781EC4359D000989FA /* Home */,
 				BBE14A771EC4359D000989FA /* Expand */,
+				BBE14A8D1EC44E34000989FA /* Resource */,
 				BBE14A5D1EC4106D000989FA /* ViewController.swift */,
 				BBE14A5F1EC4106D000989FA /* Main.storyboard */,
 				BBE14A621EC4106D000989FA /* Assets.xcassets */,
 				BBE14A641EC4106D000989FA /* LaunchScreen.storyboard */,
-				BBE14A8B1EC449E4000989FA /* Info.plist */,
 				BBE14A6D1EC4162F000989FA /* EasyMap-Bridging-Header.h */,
 			);
 			path = EasyMap;
@@ -145,6 +145,30 @@
 				BBE14A871EC439BD000989FA /* HomeVC.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		BBE14A8D1EC44E34000989FA /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				BBE14A8E1EC44E34000989FA /* Image */,
+				BBE14A8F1EC44E34000989FA /* Plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		BBE14A8E1EC44E34000989FA /* Image */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		BBE14A8F1EC44E34000989FA /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				BBE14A901EC44E34000989FA /* Info.plist */,
+			);
+			path = Plist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,9 +235,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBE14A8C1EC449E4000989FA /* Info.plist in Resources */,
 				BBE14A661EC4106D000989FA /* LaunchScreen.storyboard in Resources */,
 				BBE14A631EC4106D000989FA /* Assets.xcassets in Resources */,
+				BBE14A911EC44E34000989FA /* Info.plist in Resources */,
 				BBE14A611EC4106D000989FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,7 +434,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = D3JEV5MWE2;
-				INFOPLIST_FILE = EasyMap/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/EasyMap/Resource/Plist/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonhory.EasyMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -427,7 +452,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = D3JEV5MWE2;
-				INFOPLIST_FILE = EasyMap/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/EasyMap/Resource/Plist/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonhory.EasyMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
