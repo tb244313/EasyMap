@@ -15,19 +15,26 @@ class HomeVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        config(leftStr: nil, leftHelpStr: nil, titleStr: "主页", rightHelpStr: nil, rightStr: nil)
+        config(leftStr: nil, leftHelpStr: nil, titleStr: "地图", rightHelpStr: nil, rightStr: nil)
         
         initMapView()
     }
     
     func initMapView() {
-        let f = CGRect(x: 0, y: 0, width: SCREEN_W, height: SCREEN_H - 64)
+        let f = CGRect(x: 0, y: 0, width: SCREEN_W, height: SCREEN_H - 49)
         mapView = MAMapView(frame: f)
         mapView.delegate = self
+        mapView.zoomLevel = 15
         view.addSubview(mapView)
         
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
+        
+        // 自定义定位小蓝点
+        let r = MAUserLocationRepresentation()
+        r.showsHeadingIndicator = false
+        r.lineWidth = 0.5
+        mapView.update(r)
     }
 
     override func didReceiveMemoryWarning() {

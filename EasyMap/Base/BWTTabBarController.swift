@@ -14,7 +14,7 @@ class BWTTabBarController: UITabBarController {
         super.viewDidLoad()
         
         let home = HomeVC()
-        setTabBarItem(home, imageName: "shouye", title: "首页")
+        setTabBarItem(home, imageName: "shouye", title: "地图")
         let homeNav = BaseNavigationController(rootViewController: home)
         
 //        let commodity = CommodityVC()
