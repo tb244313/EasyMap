@@ -21,7 +21,7 @@ class DisplayVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        config(leftStr: backImage, leftHelpStr: nil, titleStr: "", rightHelpStr: nil, rightStr: nil)
+        config(leftStr: backImage, leftHelpStr: nil, titleStr: "轨迹展示", rightHelpStr: nil, rightStr: nil)
         
         initMapView()
         
@@ -114,4 +114,41 @@ class DisplayVC: BaseViewController {
 
 extension DisplayVC: MAMapViewDelegate {
     
+    // MARK: 绘制小车
+    func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
+        if annotation.isEqual(myLocation) {
+            let annotationID = "myLocationID"
+            var poiAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationID)
+            if poiAnnotationView == nil {
+                poiAnnotationView = MAAnnotationView(annotation: annotation, reuseIdentifier: annotationID)
+            }
+            poiAnnotationView?.image = UIImage(named: "icon_car")
+            poiAnnotationView?.canShowCallout = false
+            return poiAnnotationView!
+        }
+        
+        if annotation.isKind(of: MAPointAnnotation.self) {
+            let annotationID = "locationID"
+            
+            var poiAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationID) as? MAPinAnnotationView
+            if poiAnnotationView == nil {
+                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: annotationID)
+            }
+            poiAnnotationView?.animatesDrop = true
+            poiAnnotationView?.canShowCallout = true
+            return poiAnnotationView!
+        }
+        return nil
+    }
+    
+    // MARK: 绘制路线
+    func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
+        if overlay.isKind(of: MAPolyline.self) {
+            let renderer: MAPolylineRenderer = MAPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor.red
+            renderer.lineWidth = 3
+            return renderer
+        }
+        return nil
+    }
 }
