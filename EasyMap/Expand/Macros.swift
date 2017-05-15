@@ -19,3 +19,4 @@ let BackImage = UIImage(named: "c_fanhuihei")
 let CurrentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
 let SandboxVersion = UserDefaults.standard.object(forKey: "CFBundleShortVersionString") as? String ?? ""
 
+let backImage = UIImage(named: "icon_back")

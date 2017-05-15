@@ -40,6 +40,11 @@ class BaseViewController: UIViewController {
         loadNav()
     }
     
+    func update(title: String) {
+        titleLabel?.text = title
+        titleLabel?.sizeToFit()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
