@@ -140,7 +140,10 @@ class HomeVC: BaseViewController {
         mapView = MAMapView(frame: f)
         mapView.delegate = self
         mapView.zoomLevel = 15
+        // 比例尺
         mapView.showsScale = false
+        // 室内地图
+        mapView.isShowsIndoorMap = true
         view.addSubview(mapView)
         
         // 开启定位
