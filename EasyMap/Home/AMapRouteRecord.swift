@@ -60,4 +60,39 @@ class AMapRouteRecord: NSObject, NSCoding {
         return formatter.string(from: startTime)
     }
 
+    func startLocation() -> CLLocation? {
+        return locationsArray.first
+    }
+    
+    func endLocation() -> CLLocation? {
+        return locationsArray.last
+    }
+    
+    func totalDistance() -> CLLocationDistance {
+        var distance: CLLocationDistance = 0
+        if locationsArray.count > 1 {
+            var currentLoaction: CLLocation? = nil
+            for location in locationsArray {
+                if currentLoaction != nil {
+                    distance += location.distance(from: currentLoaction!)
+                }
+                currentLoaction = location
+            }
+        }
+        return distance
+    }
+    
+    func totalDuration() -> TimeInterval {
+        return endTime!.timeIntervalSince(startTime)
+    }
+    
+    func coordinates() -> [CLLocationCoordinate2D] {
+        var coordinates: [CLLocationCoordinate2D] = []
+        if locationsArray.count > 1 {
+            for location in locationsArray {
+                coordinates.append(location.coordinate)
+            }
+        }
+        return coordinates
+    }
 }

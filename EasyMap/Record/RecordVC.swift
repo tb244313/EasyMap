@@ -62,5 +62,16 @@ extension RecordVC: UITableViewDataSource {
 }
 
 extension RecordVC: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        if !routes.isEmpty {
+            
+            let route: AMapRouteRecord = routes[indexPath.row]
+            let displayController = DisplayVC()
+            displayController.route = route
+            
+            navigationController!.pushViewController(displayController, animated: true)
+        }
+    }
 }
