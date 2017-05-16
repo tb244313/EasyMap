@@ -13,10 +13,12 @@ class DisplayVC: BaseViewController {
     var route: AMapRouteRecord?
     var mapView: MAMapView?
     var myLocation: MAAnimatedAnnotation?
+    let traceManager = MATraceManager()
+    var polyline: MAPolyline?
     
     var isPlaying = false
     var traceCoordinates: [CLLocationCoordinate2D] = []
-    var duration: Double = 0.0
+    var duration: Double = 3.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +30,19 @@ class DisplayVC: BaseViewController {
         showRoute()
         
         handleNav()
+        
+//        handleLocations()
     }
     
     // MARK: 点击事件
+    override func leftBtnClicked(btn: UIButton) {
+        mapView?.showsUserLocation = false
+        mapView?.removeAnnotations(mapView?.annotations)
+        mapView?.remove(polyline)
+        mapView?.delegate = nil
+        super.leftBtnClicked(btn: btn)
+    }
+    
     func playAndStop() {
         if route == nil { return }
         
@@ -85,15 +97,49 @@ class DisplayVC: BaseViewController {
         
         var coordiantes: [CLLocationCoordinate2D] = route!.coordinates()
         
-        let polyline = MAPolyline(coordinates: &coordiantes, count: UInt(coordiantes.count))
+        polyline = MAPolyline(coordinates: &coordiantes, count: UInt(coordiantes.count))
+        polyline?.title = "mmm"
         
         mapView!.add(polyline)
         
         mapView!.showAnnotations(mapView!.annotations, animated: true)
         
         traceCoordinates = route!.coordinates()
-        duration = route!.totalDuration() / 2.0
+//        duration = route!.totalDuration() / 2.0
     }
+    
+//    轨迹纠偏，效果不理想
+//    func handleLocations() {
+//        var traceLocations: [MATraceLocation] = []
+//        for cl2D in traceCoordinates {
+//            let traceLocation = MATraceLocation()
+//            traceLocation.loc = cl2D
+//            traceLocations.append(traceLocation)
+//        }
+//        
+//        let queryOperation = traceManager.queryProcessedTrace(with: traceLocations, type: AMapCoordinateType(rawValue: .max)!, processingCallback: { (index, arr) in
+//            print("第", index, "组:", arr)
+//        }, finishCallback: { (arr: [MATracePoint]?, distance) in
+//            self.addTrace(points: arr)
+//        }) { (errCode, errDesc) in
+//            print("error: ", errCode, errDesc.orNil)
+//        }
+//    }
+//    
+//    func addTrace(points: [MATracePoint]?) {
+//        if points == nil { return }
+//        var newCoordinates: [CLLocationCoordinate2D] = []
+//        for point in points! {
+//            var cl = CLLocationCoordinate2D()
+//            cl.latitude = point.latitude
+//            cl.longitude = point.longitude
+//            newCoordinates.append(cl)
+//        }
+//        let polyline = MAPolyline(coordinates: &newCoordinates, count: UInt(newCoordinates.count))
+//        
+//        mapView!.add(polyline)
+//        mapView!.showAnnotations(mapView?.annotations, animated: true)
+//    }
     
     // MARK: UI
     func initMapView() {
@@ -145,8 +191,10 @@ extension DisplayVC: MAMapViewDelegate {
     func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
         if overlay.isKind(of: MAPolyline.self) {
             let renderer: MAPolylineRenderer = MAPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = UIColor.red
+            renderer.strokeColor = rgba(187, 187, 193, 0.6)
             renderer.lineWidth = 3
+            renderer.lineJoinType = kMALineJoinRound
+            renderer.lineCapType = kMALineCapArrow
             return renderer
         }
         return nil

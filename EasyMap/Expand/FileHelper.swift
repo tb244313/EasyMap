@@ -51,7 +51,6 @@ class FileHelper: NSObject {
                 let path = filePath(withName: file)
                 print("filePath:", path)
                 if let route = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? AMapRouteRecord {
-                    print("成功归档", route)
                     routeList.append(route)
                 }
             }
@@ -72,5 +71,15 @@ class FileHelper: NSObject {
             resulte = nil
         }
         return  nil
+    }
+    
+    class func downloadMap() {
+//        let item = MAOfflineItem()
+        
+//        MAOfflineMap.shared().downloadItem(item, shouldContinueWhenAppEntersBackground: true) { (downloadItem, downloadStatus, info) in
+//            print("---- item:",downloadItem)
+//            print("---- status", downloadStatus)
+//            print("---- info: ", info)
+//        }
     }
 }

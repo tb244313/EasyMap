@@ -28,6 +28,10 @@ class HomeVC: BaseViewController {
     
     var isRecording = false
     var isSaving = false
+    // 附近功能
+    let nearbyManager = AMapNearbySearchManager.sharedInstance()
+    var currentLocation: CLLocation?
+    let search = AMapSearchAPI()
     
     // ---  UI ---
     // 位置信息label
@@ -43,6 +47,8 @@ class HomeVC: BaseViewController {
         
         loadUI()
         configNav()
+        
+//        FileHelper.downloadMap()
     }
     
     // MARK: 普通事件
@@ -129,6 +135,16 @@ class HomeVC: BaseViewController {
         }
     }
     
+    func searchNear() {
+        let request = AMapNearbySearchRequest()
+        request.center = AMapGeoPoint.location(withLatitude: CGFloat(currentLocation!.coordinate.latitude), longitude: CGFloat(currentLocation!.coordinate.longitude))
+        request.radius = 100000
+        request.timeRange = 60
+        request.searchType = .liner
+        
+        search?.aMapNearbySearch(request)
+    }
+    
     // MARK: UI部分
     func configNav() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_play"), style: .plain, target: self, action: #selector(actionRecordAndStop))
@@ -161,6 +177,19 @@ class HomeVC: BaseViewController {
         locationManager.distanceFilter = 200
         locationManager.locatingWithReGeocode = true
         locationManager.startUpdatingLocation()
+        
+        // 附近
+        nearbyManager?.delegate = self
+        if nearbyManager!.isAutoUploading {
+            nearbyManager?.stopAutoUploadNearbyInfo()
+        } else {
+            nearbyManager?.startAutoUploadNearbyInfo()
+            print("开始自动上传")
+        }
+        
+        // 搜索
+        search?.delegate = self
+    
     }
     
     func loadUI() {
@@ -233,6 +262,43 @@ extension HomeVC: AMapLocationManagerDelegate {
         if let reGe = reGeocode {
             NSLog("reGeocode:%@", reGe)
             locationLabel.text = reGe.formattedAddress
+        }
+        
+        currentLocation = location
+    }
+}
+
+
+extension HomeVC: AMapNearbySearchManagerDelegate {
+    func nearbyInfo(forUploading manager: AMapNearbySearchManager!) -> AMapNearbyUploadInfo! {
+        if currentLocation == nil {
+            print("当前位置为空,请稍后")
+            return nil
+        }
+        print("开始上传当前位置")
+        let info = AMapNearbyUploadInfo()
+        info.userID = "001"
+        info.coordinate = currentLocation!.coordinate
+        return info
+    }
+}
+
+extension HomeVC: AMapSearchDelegate {
+    func onNearbySearchDone(_ request: AMapNearbySearchRequest!, response: AMapNearbySearchResponse!) {
+        if response.infos.count == 0 {
+            print("搜索结果为空")
+            return
+        }
+        
+        print("搜索结果共", response.infos.count, "个")
+        
+        for info in response.infos {
+            let anno = MAPointAnnotation()
+            anno.title = "001"
+            anno.subtitle = Date(timeIntervalSince1970: info.updatetime).description(with: NSLocale.current)
+            anno.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(info.location.latitude), CLLocationDegrees(info.location.longitude))
+            
+            mapView.addAnnotation(anno)
         }
     }
 }
