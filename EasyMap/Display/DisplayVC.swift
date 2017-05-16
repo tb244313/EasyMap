@@ -14,10 +14,13 @@ class DisplayVC: BaseViewController {
     var mapView: MAMapView?
     var myLocation: MAAnimatedAnnotation?
     let traceManager = MATraceManager()
-    var polyline: MAPolyline?
+    var polyline: MAMultiPolyline?
     
     var isPlaying = false
     var traceCoordinates: [CLLocationCoordinate2D] = []
+    var lineColors: [UIColor] = []
+    var indexToColorDict: [Int: UIColor] = [:]
+    var speedToCLArr: [[String: Any]] = []
     var duration: Double = 3.0
     
     override func viewDidLoad() {
@@ -86,7 +89,6 @@ class DisplayVC: BaseViewController {
         let startPoint = MAPointAnnotation()
         startPoint.coordinate = route!.startLocation()!.coordinate
         startPoint.title = "开始"
-        
         mapView!.addAnnotation(startPoint)
         
         let endPoint = MAPointAnnotation()
@@ -95,17 +97,103 @@ class DisplayVC: BaseViewController {
         
         mapView!.addAnnotation(endPoint)
         
-        var coordiantes: [CLLocationCoordinate2D] = route!.coordinates()
+        // 子线程排序 绘制路线
+        let queue = DispatchQueue(label: "quickSortQueue")
+        queue.async {
+            for i in 0...(self.route!.locationsArray.count - 1) {
+                let cl = self.route!.locationsArray[i]
+                self.indexToColorDict[i] = Blue
+                var speedToCLDic: [String: Any] = [:]
+                speedToCLDic["speed"] = cl.speed
+                speedToCLDic["cl"] = cl
+                self.speedToCLArr.append(speedToCLDic)
+            }
+            print("排序前", self.speedToCLArr)
+            self.speedToCLArr = self.quickSort(data: self.speedToCLArr)
+            print("排序后", self.speedToCLArr)
+            if self.speedToCLArr.count >= 6 {
+                let key: Double = 1/6
+
+                for i in 0..<self.speedToCLArr.count {
+                    let currentValue: Double = key * Double(i+1)
+                    if currentValue < key {
+                        self.handle(i: i, colorIndex: 5)
+                    } else if currentValue >= key && currentValue < 2*key {
+                        self.handle(i: i, colorIndex: 4)
+                    } else if currentValue >= 2*key && currentValue < 3*key {
+                        self.handle(i: i, colorIndex: 3)
+                    } else if currentValue >= 3*key && currentValue < 4*key {
+                        self.handle(i: i, colorIndex: 2)
+                    } else if currentValue >= 4*key && currentValue < 5*key {
+                        self.handle(i: i, colorIndex: 1)
+                    } else if currentValue >= 5*key {
+                        self.handle(i: i, colorIndex: 0)
+                    }
+                }
+            } else {
+                for i in 0..<self.speedToCLArr.count {
+                    self.handle(i: i, colorIndex: i)
+                }
+            }
+            
+            var indexss: [Int] = []
+            for dic in self.indexToColorDict {
+                indexss.append(dic.key)
+                self.lineColors.append(dic.value)
+            }
+            
+            
+            var coordiantes: [CLLocationCoordinate2D] = self.route!.coordinates()
+            self.polyline = MAMultiPolyline(coordinates: &coordiantes, count: UInt(coordiantes.count), drawStyleIndexes: indexss)
+            
+            self.polyline?.title = "多段线"
+            
+            self.mapView!.add(self.polyline)
+            
+            self.mapView!.showAnnotations(self.mapView!.annotations, animated: true)
+            
+            self.traceCoordinates = self.route!.coordinates()
+        }
+    }
+    
+    func handle(i: Int, colorIndex: Int) {
+        for j in 0..<self.route!.locationsArray.count {
+            let cl = self.route!.locationsArray[j]
+            let dic: [String: Any] = speedToCLArr[i]
+            if let speed: CLLocationSpeed = dic["speed"] as? CLLocationSpeed, let dicCL: CLLocation = dic["cl"] as? CLLocation {
+                if speed == cl.speed && dicCL == cl {
+                    indexToColorDict[j] = lineSpeedColors[colorIndex]
+                    print("No. ",j, "  color = ",lineSpeedColors[colorIndex])
+                    break
+                }
+            }
+        }
+    }
+    
+    func quickSort(data:[[String: Any]]) -> [[String: Any]] {
+        if data.count <= 1 {
+            return data
+        }
         
-        polyline = MAPolyline(coordinates: &coordiantes, count: UInt(coordiantes.count))
-        polyline?.title = "mmm"
+        var left:[[String: Any]] = []
+        var right:[[String: Any]] = []
+        let pivot:[String: Any] = data[data.count-1]
+        for index in 0..<data.count-1 {
+            let indexV1: [String : Any] = data[index]
+            if let indexV2: CLLocationSpeed = indexV1["speed"] as? CLLocationSpeed , let pivotV2: CLLocationSpeed = pivot["speed"] as? CLLocationSpeed {
+                if indexV2 < pivotV2 {
+                    left.append(indexV1)
+                } else {
+                    right.append(indexV1)
+                }
+            }
+        }
         
-        mapView!.add(polyline)
-        
-        mapView!.showAnnotations(mapView!.annotations, animated: true)
-        
-        traceCoordinates = route!.coordinates()
-//        duration = route!.totalDuration() / 2.0
+        var result = quickSort(data: left)
+        result.append(pivot)
+        let rightResult = quickSort(data: right)
+        result.append(contentsOf: rightResult)
+        return result
     }
     
 //    轨迹纠偏，效果不理想
@@ -160,7 +248,7 @@ class DisplayVC: BaseViewController {
 
 extension DisplayVC: MAMapViewDelegate {
     
-    // MARK: 绘制小车
+    // MARK: 绘制小车/ 起点终点
     func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
         if annotation.isEqual(myLocation) {
             let annotationID = "myLocationID"
@@ -180,6 +268,12 @@ extension DisplayVC: MAMapViewDelegate {
             if poiAnnotationView == nil {
                 poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: annotationID)
             }
+            if annotation.title == "开始" {
+                poiAnnotationView?.image = UIImage(named: "manBegin")
+            } else if annotation.title == "结束" {
+                poiAnnotationView?.image = UIImage(named: "manEnd")
+            }
+            
             poiAnnotationView?.animatesDrop = true
             poiAnnotationView?.canShowCallout = true
             return poiAnnotationView!
@@ -189,13 +283,15 @@ extension DisplayVC: MAMapViewDelegate {
     
     // MARK: 绘制路线
     func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
-        if overlay.isKind(of: MAPolyline.self) {
-            let renderer: MAPolylineRenderer = MAPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = rgba(187, 187, 193, 0.6)
-            renderer.lineWidth = 3
-            renderer.lineJoinType = kMALineJoinRound
-            renderer.lineCapType = kMALineCapArrow
-            return renderer
+        if overlay.isKind(of: MAMultiPolyline.self) {
+            let r = MAMultiColoredPolylineRenderer(overlay: overlay)
+            r!.strokeColors = lineColors
+            r!.lineWidth = 3
+            r!.lineJoinType = kMALineJoinRound
+            r!.lineCapType = kMALineCapArrow
+            r!.isGradient = true
+            
+            return r
         }
         return nil
     }
