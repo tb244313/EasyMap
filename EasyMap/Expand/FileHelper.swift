@@ -73,13 +73,62 @@ class FileHelper: NSObject {
         return  nil
     }
     
-    class func downloadMap() {
-//        let item = MAOfflineItem()
+    class func downloadMap(cityCode: String,_ vc: UIViewController) {
         
-//        MAOfflineMap.shared().downloadItem(item, shouldContinueWhenAppEntersBackground: true) { (downloadItem, downloadStatus, info) in
-//            print("---- item:",downloadItem)
-//            print("---- status", downloadStatus)
-//            print("---- info: ", info)
-//        }
+        let queue = DispatchQueue(label: "downloadMapQueue")
+        queue.async {
+            
+            let map = MAOfflineMap.shared()
+            
+            let provinces = map!.provinces as! [MAOfflineProvince]
+            if provinces.isEmpty { return }
+            
+            var allCitys: [MAOfflineCity] = []
+            for province in provinces {
+                let citys: [MAOfflineCity] = province.cities as! [MAOfflineCity]
+                citys.forEach({ (city) in
+                    allCitys.append(city)
+                })
+            }
+            
+            let municipalities = map!.municipalities as! [MAOfflineCity]
+            municipalities.forEach({ (city) in
+                allCitys.append(city)
+            })
+            
+            var item: MAOfflineCity?
+            for city in allCitys {
+                if city.cityCode == cityCode {
+                    if city.itemStatus != .installed {
+                        item = city
+                    }
+                    print("匹配到城市：",city, "字节:", city.size, "M:", city.size / 1024 / 1024)
+                    
+                    break
+                }
+            }
+            
+            if item == nil { return }
+            
+            var msg = "是否下载\(item!.name)离线地图资源"
+            if EMNetwork.shared.networkStatus == .reachable(.ethernetOrWiFi) {
+                msg = "检测到您当前处于WiFi环境,是否下载\(item!.name!)离线地图资源"
+            } else if EMNetwork.shared.networkStatus == .reachable(.wwan) {
+                let m: Double = Double(item!.size) / 1024.0 / 1024.0
+                msg = "检测到您当前处于移动网络环境,是否下载\(item!.name!)离线地图资源,该操作将消耗您大约"
+                let mStr = String.init(format: "%.2fM流量", m)
+                msg += mStr
+            }
+        
+            let alert = UIAlertController(title: "注意", message: msg, preferredStyle: .alert)
+            let sure = UIAlertAction(title: "好的", style: .default, handler: { (ac) in
+                print("开始下载:",item!.name)
+                MAOfflineMap.shared().downloadItem(item, shouldContinueWhenAppEntersBackground: true) { _ in }
+            })
+            let cancel = UIAlertAction(title: "不必了", style: .cancel)
+            alert.addAction(cancel)
+            alert.addAction(sure)
+            vc.present(alert, animated: true)
+        }
     }
 }

@@ -26,6 +26,7 @@ class HomeVC: BaseViewController {
     
     var totalTraceLength: Double = 0.0
     
+    var isLocationSuccess = false
     var isRecording = false
     var isSaving = false
     // 附近功能
@@ -48,7 +49,7 @@ class HomeVC: BaseViewController {
         loadUI()
         configNav()
         
-//        FileHelper.downloadMap()
+        listenNetworkStatus()
     }
     
     // MARK: 普通事件
@@ -145,6 +146,16 @@ class HomeVC: BaseViewController {
         search?.aMapNearbySearch(request)
     }
     
+    // MARK: 成功定位后只执行一次
+    func handleIfLocationSuccess(_ reG: AMapLocationReGeocode) {
+        if isLocationSuccess == true {
+            return
+        }
+        isLocationSuccess = true
+        
+        // 下载之前 56.9M 77.2 20.3
+        FileHelper.downloadMap(cityCode: reG.citycode, self)
+    }
     // MARK: UI部分
     func configNav() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_play"), style: .plain, target: self, action: #selector(actionRecordAndStop))
@@ -179,16 +190,16 @@ class HomeVC: BaseViewController {
         locationManager.startUpdatingLocation()
         
         // 附近
-        nearbyManager?.delegate = self
-        if nearbyManager!.isAutoUploading {
-            nearbyManager?.stopAutoUploadNearbyInfo()
-        } else {
-            nearbyManager?.startAutoUploadNearbyInfo()
-            print("开始自动上传")
-        }
-        
-        // 搜索
-        search?.delegate = self
+//        nearbyManager?.delegate = self
+//        if nearbyManager!.isAutoUploading {
+//            nearbyManager?.stopAutoUploadNearbyInfo()
+//        } else {
+//            nearbyManager?.startAutoUploadNearbyInfo()
+//            print("开始自动上传")
+//        }
+//        
+//        // 搜索
+//        search?.delegate = self
     
     }
     
@@ -262,9 +273,12 @@ extension HomeVC: AMapLocationManagerDelegate {
         if let reGe = reGeocode {
             NSLog("reGeocode:%@", reGe)
             locationLabel.text = reGe.formattedAddress
+            print("cityCode == ",reGe.citycode)
+            handleIfLocationSuccess(reGe)
         }
         
         currentLocation = location
+        
     }
 }
 
@@ -299,6 +313,15 @@ extension HomeVC: AMapSearchDelegate {
             anno.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(info.location.latitude), CLLocationDegrees(info.location.longitude))
             
             mapView.addAnnotation(anno)
+        }
+    }
+}
+
+// MARK: 网络相关
+extension HomeVC {
+    func listenNetworkStatus() {
+        EMNetwork.shared.listenNetworkReachabilityStatus { (status) in
+            
         }
     }
 }

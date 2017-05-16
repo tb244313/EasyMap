@@ -12,5 +12,8 @@ target 'EasyMap' do
   
   pod 'UIColor_Hex_Swift' # 颜色
   pod 'SVProgressHUD' # HUD
+  
+  pod 'Alamofire' # Network
+  pod 'AlamofireNetworkActivityIndicator' # 网络状态圈圈
 
 end

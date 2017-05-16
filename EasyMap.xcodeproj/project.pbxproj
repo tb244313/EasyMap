@@ -12,6 +12,7 @@
 		BB8D0CB51EC98807006C5E6A /* RecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8D0CB41EC98807006C5E6A /* RecordVC.swift */; };
 		BBA153F31EC947F000EB8C9A /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA153F21EC947F000EB8C9A /* FileHelper.swift */; };
 		BBA153F51EC9523C00EB8C9A /* AMapRouteRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA153F41EC9523C00EB8C9A /* AMapRouteRecord.swift */; };
+		BBB8E2571ECAD0B9003B0565 /* EMNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB8E2561ECAD0B9003B0565 /* EMNetwork.swift */; };
 		BBE14A5E1EC4106D000989FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE14A5D1EC4106D000989FA /* ViewController.swift */; };
 		BBE14A611EC4106D000989FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A5F1EC4106D000989FA /* Main.storyboard */; };
 		BBE14A631EC4106D000989FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBE14A621EC4106D000989FA /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		BB8D0CB41EC98807006C5E6A /* RecordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVC.swift; sourceTree = "<group>"; };
 		BBA153F21EC947F000EB8C9A /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		BBA153F41EC9523C00EB8C9A /* AMapRouteRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMapRouteRecord.swift; sourceTree = "<group>"; };
+		BBB8E2561ECAD0B9003B0565 /* EMNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMNetwork.swift; sourceTree = "<group>"; };
 		BBE14A581EC4106D000989FA /* EasyMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE14A5D1EC4106D000989FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BBE14A601EC4106D000989FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				BBE14A7B1EC43631000989FA /* Extension.swift */,
 				BBE14A791EC43626000989FA /* Tool.swift */,
 				BBA153F21EC947F000EB8C9A /* FileHelper.swift */,
+				BBB8E2561ECAD0B9003B0565 /* EMNetwork.swift */,
 			);
 			path = Expand;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				BBE14A811EC43798000989FA /* BaseViewController.swift in Sources */,
 				BBE14A881EC439BD000989FA /* HomeVC.swift in Sources */,
 				BB8D0CB51EC98807006C5E6A /* RecordVC.swift in Sources */,
+				BBB8E2571ECAD0B9003B0565 /* EMNetwork.swift in Sources */,
 				BBE14A841EC43798000989FA /* BWTTabBarController.swift in Sources */,
 				BBE14A831EC43798000989FA /* BaseNavigationController.swift in Sources */,
 				BBA153F31EC947F000EB8C9A /* FileHelper.swift in Sources */,
