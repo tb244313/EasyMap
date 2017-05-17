@@ -14,7 +14,7 @@ class DisplayVC: BaseViewController {
     var mapView: MAMapView?
     var myLocation: MAAnimatedAnnotation?
     let traceManager = MATraceManager()
-    var polyline: MAMultiPolyline?
+    var polyline: MAPolyline?//MAMultiPolyline?
     
     var isPlaying = false
     var traceCoordinates: [CLLocationCoordinate2D] = []
@@ -100,56 +100,58 @@ class DisplayVC: BaseViewController {
         // 子线程排序 绘制路线
         let queue = DispatchQueue(label: "quickSortQueue")
         queue.async {
-            var indexss: [Int] = []
-            for i in 0...(self.route!.locationsArray.count - 1) {
-                let cl = self.route!.locationsArray[i]
-                self.indexToColorDict[i] = Blue
-                var speedToCLDic: [String: Any] = [:]
-                speedToCLDic["speed"] = cl.speed
-                speedToCLDic["cl"] = cl
-                self.speedToCLArr.append(speedToCLDic)
-                if i != 0 {
-                    indexss.append(i)
-                }
-            }
-            print("排序前", self.speedToCLArr)
-            self.speedToCLArr = self.quickSort(data: self.speedToCLArr)
-            print("排序后", self.speedToCLArr)
-            let count = self.speedToCLArr.count
-            
-            if count >= 6 {
-                let key: Double = 1/6
-                for i in 0..<self.speedToCLArr.count {
-                    let currentValue: Double = Double(i) / Double(count)
-                    if currentValue < key {
-                        self.handle(i: i, colorIndex: 5)
-                    } else if currentValue >= key && currentValue < 2*key {
-                        self.handle(i: i, colorIndex: 4)
-                    } else if currentValue >= 2*key && currentValue < 3*key {
-                        self.handle(i: i, colorIndex: 3)
-                    } else if currentValue >= 3*key && currentValue < 4*key {
-                        self.handle(i: i, colorIndex: 2)
-                    } else if currentValue >= 4*key && currentValue < 5*key {
-                        self.handle(i: i, colorIndex: 1)
-                    } else if currentValue >= 5*key {
-                        self.handle(i: i, colorIndex: 0)
-                    }
-                }
-            } else {
-                for i in 0..<self.speedToCLArr.count {
-                    self.handle(i: i, colorIndex: i)
-                }
-            }
-            
-            
-            for dic in self.indexToColorDict {
-                self.lineColors.append(dic.value)
-            }
-            print("颜色分段数组",indexss)
-            print("颜色数组", self.lineColors)
-            
+//            var indexss: [Int] = []
+//            for i in 0...(self.route!.locationsArray.count - 1) {
+//                let cl = self.route!.locationsArray[i]
+//                self.indexToColorDict[i] = Blue
+//                var speedToCLDic: [String: Any] = [:]
+//                speedToCLDic["speed"] = cl.speed
+//                speedToCLDic["cl"] = cl
+//                self.speedToCLArr.append(speedToCLDic)
+//                if i != 0 {
+//                    indexss.append(i)
+//                }
+//            }
+//            print("排序前", self.speedToCLArr)
+//            self.speedToCLArr = self.quickSort(data: self.speedToCLArr)
+//            print("排序后", self.speedToCLArr)
+//            let count = self.speedToCLArr.count
+//            
+//            if count >= 6 {
+//                let key: Double = 1/6
+//                for i in 0..<self.speedToCLArr.count {
+//                    let currentValue: Double = Double(i) / Double(count)
+//                    if currentValue < key {
+//                        self.handle(i: i, colorIndex: 5)
+//                    } else if currentValue >= key && currentValue < 2*key {
+//                        self.handle(i: i, colorIndex: 4)
+//                    } else if currentValue >= 2*key && currentValue < 3*key {
+//                        self.handle(i: i, colorIndex: 3)
+//                    } else if currentValue >= 3*key && currentValue < 4*key {
+//                        self.handle(i: i, colorIndex: 2)
+//                    } else if currentValue >= 4*key && currentValue < 5*key {
+//                        self.handle(i: i, colorIndex: 1)
+//                    } else if currentValue >= 5*key {
+//                        self.handle(i: i, colorIndex: 0)
+//                    }
+//                }
+//            } else {
+//                for i in 0..<self.speedToCLArr.count {
+//                    self.handle(i: i, colorIndex: i)
+//                }
+//            }
+//            
+//            
+//            for dic in self.indexToColorDict {
+//                self.lineColors.append(dic.value)
+//            }
+//            print("颜色分段数组",indexss)
+//            print("颜色数组", self.lineColors)
+//            
             var coordiantes: [CLLocationCoordinate2D] = self.route!.coordinates()
-            self.polyline = MAMultiPolyline(coordinates: &coordiantes, count: UInt(coordiantes.count), drawStyleIndexes: indexss)
+//            self.polyline = MAMultiPolyline(coordinates: &coordiantes, count: UInt(coordiantes.count), drawStyleIndexes: indexss)
+            
+            self.polyline = MAPolyline(coordinates: &coordiantes, count: UInt(coordiantes.count))
             
             self.polyline?.title = "多段线"
             
@@ -290,15 +292,24 @@ extension DisplayVC: MAMapViewDelegate {
     
     // MARK: 绘制路线
     func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
-        if overlay.isKind(of: MAMultiPolyline.self) {
-            let r = MAMultiColoredPolylineRenderer(overlay: overlay)
-            r!.strokeColors = lineColors
+//        if overlay.isKind(of: MAMultiPolyline.self) {
+//            let r = MAMultiColoredPolylineRenderer(overlay: overlay)
+//            r!.strokeColors = lineColors
+//            r!.lineWidth = 3
+//            r!.lineJoinType = kMALineJoinRound
+//            r!.lineCapType = kMALineCapArrow
+//            r!.isGradient = true
+//            
+//            return r
+//        }
+        if overlay.isKind(of: MAPolyline.self) {
+            let r = MAPolylineRenderer(overlay: overlay)
+            r?.strokeColor = UIColor("#ff0000")
             r!.lineWidth = 3
-            r!.lineJoinType = kMALineJoinRound
-            r!.lineCapType = kMALineCapArrow
-            r!.isGradient = true
+//            r!.fillColor = UIColor("#ff0000")
+//            r!.loadStrokeTextureImage(UIImage.init(named: "iblack"))
             
-            return r
+            return r!
         }
         return nil
     }

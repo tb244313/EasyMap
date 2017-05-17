@@ -16,7 +16,7 @@ class RecordVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        config(leftStr: backImage, leftHelpStr: nil, titleStr: "轨迹记录", rightHelpStr: nil, rightStr: nil)
+        config(leftStr: backImage, leftHelpStr: nil, titleStr: "轨迹历史", rightHelpStr: nil, rightStr: nil)
         
         initTableView()
         loadRoutes()

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F55D3395AE88C2A87B86147 /* Pods_EasyMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6AFC0764BEA945D25697D66 /* Pods_EasyMap.framework */; };
 		BB07725D1EC9927D007844A0 /* DisplayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07725C1EC9927D007844A0 /* DisplayVC.swift */; };
+		BB72128B1ECC278B00F76189 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72128A1ECC278B00F76189 /* SearchVC.swift */; };
 		BB8D0CB51EC98807006C5E6A /* RecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8D0CB41EC98807006C5E6A /* RecordVC.swift */; };
 		BBA153F31EC947F000EB8C9A /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA153F21EC947F000EB8C9A /* FileHelper.swift */; };
 		BBA153F51EC9523C00EB8C9A /* AMapRouteRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA153F41EC9523C00EB8C9A /* AMapRouteRecord.swift */; };
@@ -32,6 +33,7 @@
 		B54E43CAA5CE3B0E830FF3CC /* Pods-EasyMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyMap/Pods-EasyMap.release.xcconfig"; sourceTree = "<group>"; };
 		B6AFC0764BEA945D25697D66 /* Pods_EasyMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB07725C1EC9927D007844A0 /* DisplayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayVC.swift; sourceTree = "<group>"; };
+		BB72128A1ECC278B00F76189 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		BB8D0CB41EC98807006C5E6A /* RecordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVC.swift; sourceTree = "<group>"; };
 		BBA153F21EC947F000EB8C9A /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		BBA153F41EC9523C00EB8C9A /* AMapRouteRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMapRouteRecord.swift; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 			path = Display;
 			sourceTree = "<group>";
 		};
+		BB7212891ECC278000F76189 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				BB72128A1ECC278B00F76189 /* SearchVC.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		BB8D0CB31EC987F9006C5E6A /* Record */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +134,7 @@
 				BBE14A711EC43590000989FA /* Important */,
 				BBE14A761EC4359D000989FA /* Base */,
 				BBE14A781EC4359D000989FA /* Home */,
+				BB7212891ECC278000F76189 /* Search */,
 				BB8D0CB31EC987F9006C5E6A /* Record */,
 				BB07725B1EC99273007844A0 /* Display */,
 				BBE14A771EC4359D000989FA /* Expand */,
@@ -339,6 +350,7 @@
 				BBE14A831EC43798000989FA /* BaseNavigationController.swift in Sources */,
 				BBA153F31EC947F000EB8C9A /* FileHelper.swift in Sources */,
 				BBE14A861EC43804000989FA /* UIColorConst.swift in Sources */,
+				BB72128B1ECC278B00F76189 /* SearchVC.swift in Sources */,
 				BBE14A8A1EC43B04000989FA /* Macros.swift in Sources */,
 				BBE14A7A1EC43626000989FA /* Tool.swift in Sources */,
 				BBE14A741EC43590000989FA /* AppDelegate.swift in Sources */,
