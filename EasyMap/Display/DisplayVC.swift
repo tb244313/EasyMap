@@ -100,6 +100,7 @@ class DisplayVC: BaseViewController {
         // 子线程排序 绘制路线
         let queue = DispatchQueue(label: "quickSortQueue")
         queue.async {
+            var indexss: [Int] = []
             for i in 0...(self.route!.locationsArray.count - 1) {
                 let cl = self.route!.locationsArray[i]
                 self.indexToColorDict[i] = Blue
@@ -107,15 +108,19 @@ class DisplayVC: BaseViewController {
                 speedToCLDic["speed"] = cl.speed
                 speedToCLDic["cl"] = cl
                 self.speedToCLArr.append(speedToCLDic)
+                if i != 0 {
+                    indexss.append(i)
+                }
             }
             print("排序前", self.speedToCLArr)
             self.speedToCLArr = self.quickSort(data: self.speedToCLArr)
             print("排序后", self.speedToCLArr)
-            if self.speedToCLArr.count >= 6 {
+            let count = self.speedToCLArr.count
+            
+            if count >= 6 {
                 let key: Double = 1/6
-
                 for i in 0..<self.speedToCLArr.count {
-                    let currentValue: Double = key * Double(i+1)
+                    let currentValue: Double = Double(i) / Double(count)
                     if currentValue < key {
                         self.handle(i: i, colorIndex: 5)
                     } else if currentValue >= key && currentValue < 2*key {
@@ -136,12 +141,12 @@ class DisplayVC: BaseViewController {
                 }
             }
             
-            var indexss: [Int] = []
+            
             for dic in self.indexToColorDict {
-                indexss.append(dic.key)
                 self.lineColors.append(dic.value)
             }
-            
+            print("颜色分段数组",indexss)
+            print("颜色数组", self.lineColors)
             
             var coordiantes: [CLLocationCoordinate2D] = self.route!.coordinates()
             self.polyline = MAMultiPolyline(coordinates: &coordiantes, count: UInt(coordiantes.count), drawStyleIndexes: indexss)
@@ -156,14 +161,16 @@ class DisplayVC: BaseViewController {
         }
     }
     
+    let lineSpeedColors: [UIColor] = [UIColor("#ff0000"),UIColor("#ff33ff"),UIColor("#ff6600"),UIColor("#ff9900"),UIColor("#ffcc00"),UIColor("#ffff00")]
+
     func handle(i: Int, colorIndex: Int) {
         for j in 0..<self.route!.locationsArray.count {
             let cl = self.route!.locationsArray[j]
             let dic: [String: Any] = speedToCLArr[i]
             if let speed: CLLocationSpeed = dic["speed"] as? CLLocationSpeed, let dicCL: CLLocation = dic["cl"] as? CLLocation {
-                if speed == cl.speed && dicCL == cl {
+                if speed == cl.speed && dicCL.coordinate.latitude == cl.coordinate.latitude && dicCL.coordinate.longitude == cl.coordinate.longitude {
                     indexToColorDict[j] = lineSpeedColors[colorIndex]
-                    print("No. ",j, "  color = ",lineSpeedColors[colorIndex])
+                    print("No. ", j, "sppeed" ,speed , "colorIndex = ", colorIndex)
                     break
                 }
             }

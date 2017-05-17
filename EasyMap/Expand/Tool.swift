@@ -86,22 +86,3 @@ func saveCurrentVersion() {
 }
 
 
-let lineSpeedColors: [UIColor] = [UIColor("#ff0000"),UIColor("#ff3300"),UIColor("#ff6600"),UIColor("#ff9900"),UIColor("#ffcc00"),UIColor("#ffff00")]
-func handleColor(withSpeed: CLLocationSpeed) -> UIColor {
-    var color = Blue
-    if withSpeed > -1 && withSpeed < 0 {
-        color = lineSpeedColors.last!
-    } else if withSpeed >= 0 && withSpeed < 0.5 {
-        color = lineSpeedColors[4]
-    } else if withSpeed >= 0.5 && withSpeed < 1 {
-        color = lineSpeedColors[3]
-    } else if withSpeed >= 1 && withSpeed < 1.5 {
-        color = lineSpeedColors[2]
-    } else if withSpeed >= 1.5 && withSpeed < 2.0 {
-        color = lineSpeedColors[1]
-    } else {
-        color = lineSpeedColors[0]
-    }
-    return color
-}
-
